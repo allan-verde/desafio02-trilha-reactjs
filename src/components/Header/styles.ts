@@ -1,14 +1,14 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.header`
-  width: 100vw;
+  width: 100%;
   height: 104px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 2rem 10rem;
+  padding: 2rem 0rem;
 `
 
 export const Actions = styled.div`
