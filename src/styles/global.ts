@@ -19,6 +19,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, button, textarea {
-    font: 400 1rem 'Baloo 2', sans-serif;
+    font: 400 1rem 'Roboto', sans-serif;
   }
 `
