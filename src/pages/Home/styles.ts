@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   max-width: 1120px;
   margin: 0 auto 9rem;
-  min-height: 100vh;
 `
 
 export const Intro = styled.div`

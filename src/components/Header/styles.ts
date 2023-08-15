@@ -9,6 +9,11 @@ export const Container = styled.header`
   align-items: center;
 
   padding: 2rem 0rem;
+
+  position: sticky;
+  top: 0;
+
+  background-color: ${({ theme }) => theme['gray-900']};
 `
 
 export const Actions = styled.div`
