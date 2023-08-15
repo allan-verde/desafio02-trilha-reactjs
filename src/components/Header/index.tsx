@@ -1,8 +1,9 @@
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import { MapPin } from 'phosphor-react'
 import logoImg from '../../assets/logo.svg'
 
-import { Container, Actions, Location, Cart } from './styles'
+import { Container, Actions, Location } from './styles'
 import { useTheme } from 'styled-components'
+import { Cart } from '../Cart'
 
 export function Header() {
   const theme = useTheme()
@@ -17,9 +18,7 @@ export function Header() {
           <p>Porto Alegre, RS</p>
         </Location>
 
-        <Cart>
-          <ShoppingCart size={22} weight="fill" color={theme.yellow} />
-        </Cart>
+        <Cart value={0} />
       </Actions>
     </Container>
   )
