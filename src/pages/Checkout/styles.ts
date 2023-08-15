@@ -184,25 +184,6 @@ export const Cart = styled.div`
         .actions {
           display: flex;
           gap: 0.5rem;
-
-          > button {
-            display: flex;
-            gap: 0.25rem;
-            padding: 0 0.5rem;
-            align-items: center;
-            justify-content: center;
-
-            border: none;
-            border-radius: 6px;
-            background-color: ${({ theme }) => theme['gray-600']};
-
-            p {
-              font: 400 0.75rem 'Roboto', sans-serif;
-              line-height: 160%;
-              color: ${({ theme }) => theme['gray-300']};
-              text-transform: uppercase;
-            }
-          }
         }
       }
     }
@@ -271,30 +252,5 @@ export const Prices = styled.div`
     p, span {
       font: 600 1.25rem 'Roboto', sans-serif;
     }
-  }
-`
-
-export const Button = styled.button`
-  width: 100%;
-  padding: 0.75rem 0.5rem;
-  border: none;
-  border-radius: 6px;
-
-  background-color: ${({ theme }) => theme.yellow};
-  color: ${({ theme }) => theme.white};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font: 600 0.875rem 'Roboto', sans-serif;
-  line-height: 160%;
-  text-transform: uppercase;
-
-  animation: 0.2s ease-out 0s 1 slideInFromBottom;
-
-  &:hover {
-    background-color: ${({ theme }) => theme['yellow-dark']};
-    cursor: pointer;
   }
 `

@@ -1,9 +1,10 @@
 import { Bank, CreditCard, CurrencyDollar, MapPin, Minus, Money, Plus, Trash } from 'phosphor-react'
 import { Header } from '../../components/Header'
-import { Button, Cart, Container, Content, Form, Info, Payment, PaymentMethod, Prices } from './styles'
+import { Cart, Container, Content, Form, Info, Payment, PaymentMethod, Prices } from './styles'
 import { useTheme } from 'styled-components'
 import { coffeeList } from '../../utils/listCoffe'
 import { Fragment } from 'react'
+import { Button } from '../../components/Button'
 
 export function Checkout() {
   const theme = useTheme()
@@ -85,10 +86,10 @@ export function Checkout() {
                               <Plus size={14} color={theme.purple} weight="bold" />
                             </button>
                           </div>
-                          <button>
+                          <Button variant="SECONDARY">
                             <Trash size={16} color={theme.purple} />
                             <p>Remover</p>
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </div>

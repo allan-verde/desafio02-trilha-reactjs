@@ -222,16 +222,6 @@ export const CoffeeList = styled.div`
             border: none;
           }
         }
-
-        > button {
-          display: flex;
-          padding: 0.5rem;
-          align-items: center;
-          justify-content: center;
-          border-radius: 6px;
-          border: none;
-          background-color: ${({ theme }) => theme['purple']};
-        }
       }
     }
   }

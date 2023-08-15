@@ -2,9 +2,10 @@ import { Header } from '../../components/Header'
 import { CoffeeList, Container, Intro } from './styles'
 
 import coffeeImg from '../../assets/coffee.png'
-import { Coffee, Minus, Package, Plus, ShoppingCart, Timer } from 'phosphor-react'
+import { Coffee, Minus, Package, Plus, ShoppingCart, ShoppingCartSimple, Timer } from 'phosphor-react'
 import { coffeeList } from '../../utils/listCoffe'
 import { useTheme } from 'styled-components'
+import { Button } from '../../components/Button'
 
 export function Home() {
   const theme = useTheme()
@@ -77,9 +78,9 @@ export function Home() {
                       <Plus size={14} color={theme.purple} weight="bold" />
                     </button>
                   </div>
-                  <button>
-                    <ShoppingCart size={22} color={theme.white} weight="fill" />
-                  </button>
+                  <Button variant="TERTIARY">
+                    <ShoppingCartSimple size={22} color={theme.white} weight="fill" />
+                  </Button>
                 </div>
               </div>
             </div>
