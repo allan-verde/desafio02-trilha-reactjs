@@ -37,14 +37,6 @@ export const Payment = styled.div`
       gap: 2rem;
       padding: 2rem;
     }
-
-    :nth-child(1) {
-    
-    }
-
-    :nth-child(2) {
-    
-    }
   }
 `
 
@@ -78,18 +70,7 @@ export const Form = styled.div`
   gap: 1rem;
 
   input {
-    width: 100%;
-    border-radius: 4px;
-    padding: 0.75rem;
-    border: 1px solid ${({ theme }) => theme['gray-600']};
-    background-color: ${({ theme }) => theme['gray-700']};
-    position: relative;
-
-    ::placeholder {
-      font: 400 0.875rem 'Roboto', sans-serif;
-      line-height: 130%;
-      color: ${({ theme }) => theme['gray-400']};
-    }
+    flex: 1;
   }
 
   input[placeholder="CEP"], input[placeholder="Número"], input[placeholder="Bairro"] {
@@ -111,7 +92,7 @@ export const Form = styled.div`
     font-style: italic;
   }
 
-  > div {
+  .group {
     display: flex;
     gap: 0.75rem;
   }

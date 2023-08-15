@@ -6,6 +6,7 @@ import { coffeeList } from '../../utils/listCoffe'
 import { Fragment } from 'react'
 import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
+import { Input } from '../../components/Input'
 
 export function Checkout() {
   const theme = useTheme()
@@ -27,16 +28,16 @@ export function Checkout() {
                 </div>
               </Info>
               <Form>
-                <input type="text" placeholder="CEP" />
-                <input type="text" placeholder="Rua" />
-                <div>
-                  <input type="text" placeholder="Número" />
-                  <input type="text" placeholder="Complemento" />
+                <Input placeholder="CEP" />
+                <Input placeholder="Rua" optional fullWidth />
+                <div className="group">
+                  <Input placeholder="Número" />
+                  <Input placeholder="Complemento" fullWidth />
                 </div>
-                <div>
-                  <input type="text" placeholder="Bairro" />
-                  <input type="text" placeholder="Cidade" />
-                  <input type="text" placeholder="UF" />
+                <div className="group">
+                  <Input placeholder="Bairro" />
+                  <Input placeholder="Cidade" fullWidth />
+                  <Input placeholder="UF" />
                 </div>
               </Form>
             </div>
