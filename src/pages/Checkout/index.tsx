@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components'
 import { coffeeList } from '../../utils/listCoffe'
 import { Fragment } from 'react'
 import { Button } from '../../components/Button'
+import { Select } from '../../components/Select'
 
 export function Checkout() {
   const theme = useTheme()
@@ -48,18 +49,18 @@ export function Checkout() {
                 </div>
               </Info>
               <PaymentMethod>
-                <div>
+                <Select>
                   <CreditCard size={16} color={theme.purple} />
                   <p>CARTÂO DE CRÉDITO</p>
-                </div>
-                <div>
+                </Select>
+                <Select>
                   <Bank size={16} color={theme.purple} />
                   <p>CARTÃO DE DÉBITO</p>
-                </div>
-                <div>
+                </Select>
+                <Select selected>
                   <Money size={16} color={theme.purple} />
                   <p>DINHEIRO</p>
-                </div>
+                </Select>
               </PaymentMethod>
             </div>
           </div>

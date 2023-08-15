@@ -70,25 +70,6 @@ export const PaymentMethod = styled.div`
   display: flex;
   gap: 0.75rem;
   align-items: center;
-
-  > div {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    gap: 0.75rem;
-    padding: 1rem;
-    border-radius: 6px;
-
-    background-color: ${({ theme }) => theme['gray-600']};
-
-    p {
-      font: 400 0.75rem 'Roboto', sans-serif;
-      line-height: 130%;
-      color: ${({ theme }) => theme['gray-300']};
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-  }
 `
 
 export const Form = styled.div`
