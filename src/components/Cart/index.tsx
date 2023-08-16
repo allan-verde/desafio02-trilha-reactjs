@@ -1,20 +1,22 @@
 import { ShoppingCart } from 'phosphor-react'
 import { Container } from './styles'
 import { useTheme } from 'styled-components'
+import { CartContext } from '../../contexts/cart'
+import { useContext } from 'react'
 
 interface CartProps {
-  value?: number
   onClick?: () => void
 }
 
-export function Cart({ value=0, onClick }: CartProps) {
+export function Cart({ onClick }: CartProps) {
   const theme = useTheme()
+  const { cart } = useContext(CartContext)
   
   return (
     <Container onClick={onClick}>
 
-      {value > 0 && (
-        <div><span>{value}</span></div>
+      {cart.length > 0 && (
+        <div><span>{cart.length}</span></div>
       )}
       <ShoppingCart size={22} weight="fill" color={theme['yellow-dark']} />
     </Container>

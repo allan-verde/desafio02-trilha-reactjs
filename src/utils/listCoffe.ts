@@ -9,19 +9,19 @@ import expressoCremoso from '../assets/coffes/expresso-cremoso.png'
 import havaiano from '../assets/coffes/havaiano.png'
 import irlandes from '../assets/coffes/irlandes.png'
 import latte from '../assets/coffes/latte.png'
-import macchiato from '../assets/coffes/macchiato.png';
+import macchiato from '../assets/coffes/macchiato.png'
 import mocaccino from '../assets/coffes/mocaccino.png'
 
-export interface ICoffeeList {
+export interface ICoffee {
   id: number
   name: string
   description: string
   image: string
   price: number
   tags: string[]
-}[]
+}
 
-export const coffeeList: ICoffeeList[] = [
+export const coffeeList: ICoffee[] = [
   {
     id: 1,
     name: 'Expresso Tradicional',

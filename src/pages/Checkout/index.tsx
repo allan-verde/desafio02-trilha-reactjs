@@ -1,15 +1,73 @@
 import { Bank, CreditCard, CurrencyDollar, MapPin, Money, Trash } from 'phosphor-react'
 import { Cart, Container, Content, Form, Info, Payment, PaymentMethod, Prices } from './styles'
 import { useTheme } from 'styled-components'
-import { coffeeList } from '../../utils/listCoffe'
-import { Fragment } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
 import { Input } from '../../components/Input'
 import { InputNumber } from '../../components/InputNumber'
+import { CartContext } from '../../contexts/cart'
+import { formateNumberToReal } from '../../utils/formateNumberToReal'
 
 export function Checkout() {
   const theme = useTheme()
+  const { cart, changeCartItem, removeCartItem } = useContext(CartContext)
+
+  const totalItens = cart.reduce((acc, { item, quantity }) => acc + item.price * quantity, 0)
+  const delieveryPrice = 3.5
+  const totalPrice = totalItens + delieveryPrice
+
+  const [cep, setCep] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState<'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY'>('MONEY' as const)
+  const [address, setAddress] = useState({
+    street: '',
+    number: '',
+    complement: '',
+    neighborhood: '',
+    city: '',
+    state: ''
+  })
+
+  function handleChangeAddress(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+
+    setAddress({
+      ...address,
+      [name]: value
+    })
+  }
+
+  function handleCepChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const numericValue = event.target.value.replace(/\D/g, '')
+
+    if (numericValue.length <= 5) {
+      return setCep(numericValue)
+    }
+
+    setCep(`${numericValue.slice(0, 5)}-${numericValue.slice(5, 8)}`)
+  }
+
+  async function handleFetchAddress(_cep: string) {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${_cep.replace(/\D/g, '')}/json/`)
+      const data = await response.json()
+      
+      setAddress({
+        street: data.logradouro,
+        number: '',
+        complement: data.complemento,
+        neighborhood: data.bairro,
+        city: data.localidade,
+        state: data.uf
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (cep.length === 9) handleFetchAddress(cep)
+  }, [cep])
 
   return (
     <Container>
@@ -26,16 +84,57 @@ export function Checkout() {
                 </div>
               </Info>
               <Form>
-                <Input placeholder="CEP" />
-                <Input placeholder="Rua" optional fullWidth />
+                <Input
+                  name="cep"
+                  placeholder="CEP"
+                  value={cep}
+                  onChange={handleCepChange}
+                />
+                <Input
+                  name="street"
+                  placeholder="Rua"
+                  value={address.street}
+                  optional
+                  fullWidth
+                  onChange={handleChangeAddress}
+                />
                 <div className="group">
-                  <Input placeholder="Número" />
-                  <Input placeholder="Complemento" fullWidth />
+                  <Input
+                    name="number"
+                    type="number"
+                    placeholder="Número"
+                    value={address.number}    
+                    onChange={handleChangeAddress}
+                  />
+                  <Input
+                    name="complement"
+                    placeholder="Complemento"
+                    value={address.complement}
+                    fullWidth 
+                    onChange={handleChangeAddress}
+                  />
                 </div>
                 <div className="group">
-                  <Input placeholder="Bairro" />
-                  <Input placeholder="Cidade" fullWidth />
-                  <Input placeholder="UF" />
+                  <Input
+                    name="neighborhood"
+                    placeholder="Bairro"
+                    value={address.neighborhood}
+                    onChange={handleChangeAddress}
+                  />
+                  <Input
+                    name="city"
+                    placeholder="Cidade"
+                    value={address.city}
+                    fullWidth 
+                    onChange={handleChangeAddress}
+                  />
+                  <Input
+                    name="state"
+                    placeholder="UF"
+                    value={address.state}
+                    onChange={handleChangeAddress}
+                    maxLength={2}
+                  />
                 </div>
               </Form>
             </div>
@@ -48,15 +147,15 @@ export function Checkout() {
                 </div>
               </Info>
               <PaymentMethod>
-                <Select>
+                <Select selected={paymentMethod === 'CREDIT_CARD'} onClick={() => setPaymentMethod('CREDIT_CARD')}>
                   <CreditCard size={16} color={theme.purple} />
                   <p>CARTÂO DE CRÉDITO</p>
                 </Select>
-                <Select>
+                <Select selected={paymentMethod === 'DEBIT_CARD'} onClick={() => setPaymentMethod('DEBIT_CARD')}>
                   <Bank size={16} color={theme.purple} />
                   <p>CARTÃO DE DÉBITO</p>
                 </Select>
-                <Select selected>
+                <Select selected={paymentMethod === 'MONEY'} onClick={() => setPaymentMethod('MONEY')}>
                   <Money size={16} color={theme.purple} />
                   <p>DINHEIRO</p>
                 </Select>
@@ -69,27 +168,36 @@ export function Checkout() {
           <h1>Cafés selecionados</h1>
           <div>
             <div className="list">
-              {coffeeList.splice(0, 2).map((item, i, arr) => (
-                <Fragment key={item.id}>
-                  <div className="item">
-                    <div>
-                      <img src={item.image} alt="" />
-                      <div className="details">
-                        <p>{item.name}</p>
-                        <div className="actions">
-                          <InputNumber value={1} onDecrement={() => null} onIncrement={() => null} />
-                          <Button variant="SECONDARY">
-                            <Trash size={16} color={theme.purple} />
-                            <p>Remover</p>
-                          </Button>
+              {cart.length > 0
+                ? cart.map(({ item, quantity }, i, arr) => (
+                  <Fragment key={item.id}>
+                    <div className="item">
+                      <div>
+                        <img src={item.image} alt="" />
+                        <div className="details">
+                          <p>{item.name}</p>
+                          <div className="actions">
+                            <InputNumber
+                              value={quantity}
+                              onDecrement={() => changeCartItem(item.id, quantity - 1)}
+                              onIncrement={() => changeCartItem(item.id, quantity + 1)}
+                            />
+                            <Button variant="SECONDARY" onClick={() => removeCartItem(item.id)}>
+                              <Trash size={16} color={theme.purple} />
+                              <p>Remover</p>
+                            </Button>
+                          </div>
                         </div>
                       </div>
+                      <span className="price">R${' '}{formateNumberToReal(item.price)}</span>
                     </div>
-                    <span className="price">R$ 9,90</span>
+                    {i !== arr.length - 1 && <div className="separator" />}
+                  </Fragment>
+                )) : (
+                  <div className="item">
+                    <p>Nenhum item selecionado</p>
                   </div>
-                  {i !== arr.length - 1 && <div className="separator" />}
-                </Fragment>
-              ))}
+              )}
             </div>
 
             <div className="separator" />
@@ -97,19 +205,19 @@ export function Checkout() {
             <Prices>
               <div>
                 <p>Total de itens</p>
-                <span>R$ 29,70</span>
+                <span>R${' '}{formateNumberToReal(totalItens)}</span>
               </div>
               <div>
                 <p>Entrega</p>
-                <span>R$ 3,50</span>
+                <span>R${' '}{formateNumberToReal(delieveryPrice)}</span>
               </div>
               <div>
                 <p>Total</p>
-                <span>R$ 24,80</span>
+                <span>R${' '}{formateNumberToReal(totalPrice)}</span>
               </div>
             </Prices>
 
-            <Button>Confirmar pedido</Button>
+            <Button disabled={cart.length === 0} >Confirmar pedido</Button>
           </div>
         </Cart>
       </Content>

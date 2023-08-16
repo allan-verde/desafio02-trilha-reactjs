@@ -52,7 +52,7 @@ export function Home() {
         <h2>Nossos cafés</h2>
         <div className="list">
           {coffeeList.map((coffee) => (
-            <CardCoffee coffee={coffee} />
+            <CardCoffee key={coffee.id} coffee={coffee} />
           ))}
         </div>
       </CoffeeList>

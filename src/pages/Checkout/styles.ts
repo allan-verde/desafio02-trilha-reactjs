@@ -117,6 +117,13 @@ export const Cart = styled.div`
   .list > .item {
     display: flex;
     gap: 3.125rem;
+    justify-content: space-between;
+
+    > p {
+      font: 400 1rem 'Roboto', sans-serif;
+      line-height: 130%;
+      color: ${({ theme }) => theme['gray-200']};
+    }
 
     > div {
       display: flex;

@@ -38,6 +38,11 @@ export const Container = styled.button<Props>`
           &:hover {
             background-color: ${({ theme }) => theme['yellow-dark']};
           }
+
+          &:disabled {
+            background-color: ${({ theme }) => theme['gray-400']};
+            cursor: not-allowed;
+          }
         `
       
       case 'SECONDARY':

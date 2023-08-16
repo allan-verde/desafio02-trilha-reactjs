@@ -5,13 +5,16 @@ import { GlobalStyle } from './styles/global'
 
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
+import { AppProvider } from './contexts'
 
 export function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
-        <Router />
-        <GlobalStyle />
+        <AppProvider>
+          <Router />
+          <GlobalStyle />
+        </AppProvider>
       </ThemeProvider>
     </BrowserRouter>
   )

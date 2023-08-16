@@ -3,17 +3,19 @@ import { Button } from '../Button'
 import { InputNumber } from '../InputNumber'
 import { Buy, Container, Tag } from './styles'
 import { useTheme } from 'styled-components'
-import { useState } from 'react'
-import { ICoffeeList } from '../../utils/listCoffe'
+import { useContext, useState } from 'react'
+import { ICoffee } from '../../utils/listCoffe'
 import { formateNumberToReal } from '../../utils/formateNumberToReal'
+import { CartContext } from '../../contexts/cart'
 
 interface CardCoffeeProps {
-  coffee: ICoffeeList
+  coffee: ICoffee
 }
 
 export function CardCoffee({ coffee }: CardCoffeeProps) {
   const { description, image, name, price, tags } = coffee
   const theme = useTheme()
+  const { changeCartItem } = useContext(CartContext)
 
   const [quantity, setQuantity] = useState(1)
 
@@ -23,6 +25,10 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
 
   function handleDecrement() {
     if (quantity > 1) setQuantity((state) => state - 1)
+  }
+
+  function handleAddToCart() {
+    changeCartItem(coffee.id, quantity)
   }
   
   return (
@@ -46,11 +52,11 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
         <p>R${' '}<span>{formateNumberToReal(price)}</span></p>
         <div className="actions">
           <InputNumber
-            onDecrement={handleIncrement}
-            onIncrement={handleDecrement}
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
             value={quantity}
           />
-          <Button variant="TERTIARY">
+          <Button variant="TERTIARY" onClick={handleAddToCart}>
             <ShoppingCartSimple size={22} color={theme.white} weight="fill" />
           </Button>
         </div>
