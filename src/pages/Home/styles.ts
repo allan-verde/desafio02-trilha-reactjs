@@ -196,32 +196,6 @@ export const CoffeeList = styled.div`
         flex-wrap: nowrap;
         align-items: center;
         gap: 0.5rem;
-
-        .quantity {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          background-color: ${({ theme }) => theme['gray-600']};
-          padding: 0.5rem;
-          gap: 0.25rem;
-          border-radius: 6px;
-
-          > span {
-            width: 1rem;
-            text-align: center;
-          }
-
-          p {
-            color: ${({ theme }) => theme['gray-100']};
-            font: 400 1rem 'Roboto', sans-serif;
-            line-height: 130%;
-          }
-
-          button {
-            background-color: transparent;
-            border: none;
-          }
-        }
       }
     }
   }

@@ -2,10 +2,11 @@ import { Header } from '../../components/Header'
 import { CoffeeList, Container, Intro } from './styles'
 
 import coffeeImg from '../../assets/coffee.png'
-import { Coffee, Minus, Package, Plus, ShoppingCart, ShoppingCartSimple, Timer } from 'phosphor-react'
+import { Coffee, Package, ShoppingCart, ShoppingCartSimple, Timer } from 'phosphor-react'
 import { coffeeList } from '../../utils/listCoffe'
 import { useTheme } from 'styled-components'
 import { Button } from '../../components/Button'
+import { InputNumber } from '../../components/InputNumber'
 
 export function Home() {
   const theme = useTheme()
@@ -69,15 +70,7 @@ export function Home() {
               <div className="buy">
                 <p>R${' '}<span>{(9.9).toFixed(2).split('.').join(',')}</span></p>
                 <div className="actions">
-                  <div className="quantity">
-                    <button>
-                      <Minus size={14} color={theme.purple} weight="bold" />
-                    </button>
-                    <span>1</span>
-                    <button>
-                      <Plus size={14} color={theme.purple} weight="bold" />
-                    </button>
-                  </div>
+                  <InputNumber onDecrement={() => null} onIncrement={() => null} value={1} />
                   <Button variant="TERTIARY">
                     <ShoppingCartSimple size={22} color={theme.white} weight="fill" />
                   </Button>

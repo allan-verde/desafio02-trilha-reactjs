@@ -1,4 +1,4 @@
-import { Bank, CreditCard, CurrencyDollar, MapPin, Minus, Money, Plus, Trash } from 'phosphor-react'
+import { Bank, CreditCard, CurrencyDollar, MapPin, Money, Trash } from 'phosphor-react'
 import { Header } from '../../components/Header'
 import { Cart, Container, Content, Form, Info, Payment, PaymentMethod, Prices } from './styles'
 import { useTheme } from 'styled-components'
@@ -7,6 +7,7 @@ import { Fragment } from 'react'
 import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
 import { Input } from '../../components/Input'
+import { InputNumber } from '../../components/InputNumber'
 
 export function Checkout() {
   const theme = useTheme()
@@ -79,15 +80,7 @@ export function Checkout() {
                       <div className="details">
                         <p>{item.name}</p>
                         <div className="actions">
-                          <div className="quantity">
-                            <button>
-                              <Minus size={14} color={theme.purple} weight="bold" />
-                            </button>
-                            <span>1</span>
-                            <button>
-                              <Plus size={14} color={theme.purple} weight="bold" />
-                            </button>
-                          </div>
+                          <InputNumber value={1} onDecrement={() => null} onIncrement={() => null} />
                           <Button variant="SECONDARY">
                             <Trash size={16} color={theme.purple} />
                             <p>Remover</p>
