@@ -4,13 +4,14 @@ import { useTheme } from 'styled-components'
 
 interface CartProps {
   value?: number
+  onClick?: () => void
 }
 
-export function Cart({ value=0 }: CartProps) {
+export function Cart({ value=0, onClick }: CartProps) {
   const theme = useTheme()
   
   return (
-    <Container>
+    <Container onClick={onClick}>
 
       {value > 0 && (
         <div><span>{value}</span></div>

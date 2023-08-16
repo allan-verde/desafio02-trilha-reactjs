@@ -14,6 +14,10 @@ export const Container = styled.header`
   top: 0;
 
   background-color: ${({ theme }) => theme['gray-900']};
+
+  img {
+    cursor: pointer;
+  }
 `
 
 export const Actions = styled.div`

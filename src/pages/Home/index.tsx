@@ -1,4 +1,3 @@
-import { Header } from '../../components/Header'
 import { CoffeeList, Container, Intro } from './styles'
 
 import coffeeImg from '../../assets/coffee.png'
@@ -12,8 +11,6 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
-
       <Intro>
         <div>
           <div className="title">

@@ -1,5 +1,4 @@
 import { Bank, CreditCard, CurrencyDollar, MapPin, Money, Trash } from 'phosphor-react'
-import { Header } from '../../components/Header'
 import { Cart, Container, Content, Form, Info, Payment, PaymentMethod, Prices } from './styles'
 import { useTheme } from 'styled-components'
 import { coffeeList } from '../../utils/listCoffe'
@@ -14,8 +13,6 @@ export function Checkout() {
 
   return (
     <Container>
-      <Header />
-
       <Content>
         <Payment>
           <h1>Complete seu pedido</h1>

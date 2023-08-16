@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { MapPin } from 'phosphor-react'
 import logoImg from '../../assets/logo.svg'
 
@@ -7,10 +9,19 @@ import { Cart } from '../Cart'
 
 export function Header() {
   const theme = useTheme()
+  const navigate = useNavigate()
+
+  function handleNavitationToCheckout() {
+    navigate('/checkout')
+  }
+
+  function handleNavigationGoHome() {
+    navigate('/')
+  }
 
   return (
     <Container>
-      <img src={logoImg} alt="" />
+      <img src={logoImg} alt="" onClick={handleNavigationGoHome} />
 
       <Actions>
         <Location>
@@ -18,7 +29,7 @@ export function Header() {
           <p>Porto Alegre, RS</p>
         </Location>
 
-        <Cart value={0} />
+        <Cart value={0} onClick={handleNavitationToCheckout} />
       </Actions>
     </Container>
   )
