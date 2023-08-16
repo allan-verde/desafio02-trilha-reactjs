@@ -2,11 +2,10 @@ import { Header } from '../../components/Header'
 import { CoffeeList, Container, Intro } from './styles'
 
 import coffeeImg from '../../assets/coffee.png'
-import { Coffee, Package, ShoppingCart, ShoppingCartSimple, Timer } from 'phosphor-react'
+import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { coffeeList } from '../../utils/listCoffe'
 import { useTheme } from 'styled-components'
-import { Button } from '../../components/Button'
-import { InputNumber } from '../../components/InputNumber'
+import { CardCoffee } from '../../components/CardCoffee'
 
 export function Home() {
   const theme = useTheme()
@@ -56,27 +55,7 @@ export function Home() {
         <h2>Nossos cafés</h2>
         <div className="list">
           {coffeeList.map((coffee) => (
-            <div className="item" key={coffee.id}>
-              <img src={coffee.image} alt="" />
-              <div className="tags">
-                {coffee.tags.map(tag => (
-                  <div key={tag}><p>{tag}</p></div>
-                ))}
-              </div>
-              <div className="info">
-                <h3>{coffee.name}</h3>
-                <p>{coffee.description}</p>
-              </div>
-              <div className="buy">
-                <p>R${' '}<span>{(9.9).toFixed(2).split('.').join(',')}</span></p>
-                <div className="actions">
-                  <InputNumber onDecrement={() => null} onIncrement={() => null} value={1} />
-                  <Button variant="TERTIARY">
-                    <ShoppingCartSimple size={22} color={theme.white} weight="fill" />
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <CardCoffee coffee={coffee} />
           ))}
         </div>
       </CoffeeList>
