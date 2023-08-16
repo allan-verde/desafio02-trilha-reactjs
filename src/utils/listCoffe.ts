@@ -1,18 +1,27 @@
-import expresso from '../assets/coffes/expresso.png';
-import americano from '../assets/coffes/americano.png';
-import arabe from '../assets/coffes/arabe.png';
-import cafeComLeite from '../assets/coffes/cafe-com-leite.png';
-import capuccino from '../assets/coffes/capuccino.png';
-import chocolateQuente from '../assets/coffes/chocolate-quente.png';
-import cubano from '../assets/coffes/cubano.png';
-import expressoCremoso from '../assets/coffes/expresso-cremoso.png';
-import havaiano from '../assets/coffes/havaiano.png';
-import irlandes from '../assets/coffes/irlandes.png';
-import latte from '../assets/coffes/latte.png';
+import expresso from '../assets/coffes/expresso.png'
+import americano from '../assets/coffes/americano.png'
+import arabe from '../assets/coffes/arabe.png'
+import cafeComLeite from '../assets/coffes/cafe-com-leite.png'
+import capuccino from '../assets/coffes/capuccino.png'
+import chocolateQuente from '../assets/coffes/chocolate-quente.png'
+import cubano from '../assets/coffes/cubano.png'
+import expressoCremoso from '../assets/coffes/expresso-cremoso.png'
+import havaiano from '../assets/coffes/havaiano.png'
+import irlandes from '../assets/coffes/irlandes.png'
+import latte from '../assets/coffes/latte.png'
 import macchiato from '../assets/coffes/macchiato.png';
-import mocaccino from '../assets/coffes/mocaccino.png';
+import mocaccino from '../assets/coffes/mocaccino.png'
 
-export const coffeeList = [
+export interface ICoffeeList {
+  id: number
+  name: string
+  description: string
+  image: string
+  price: number
+  tags: string[]
+}[]
+
+export const coffeeList: ICoffeeList[] = [
   {
     id: 1,
     name: 'Expresso Tradicional',

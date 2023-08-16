@@ -40,6 +40,15 @@ export const Location = styled.div`
   background-color: ${({ theme }) => theme['purple-light']};
   color: ${({ theme }) => theme.purple};
   font-size: 0.875rem;
+
+  button {
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const Cart = styled.div`

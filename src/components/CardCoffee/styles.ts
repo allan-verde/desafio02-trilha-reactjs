@@ -62,12 +62,16 @@ export const Tag = styled.div`
 `
 
 export const Buy = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  gap: 1.5rem;
+  gap: 0.25rem;
+  white-space: nowrap;
 
   > p {
+    flex: 1;
+    width: 100%;
     font: 400 0.875rem 'Roboto', sans-serif;
     line-height: 130%;
     color: ${({ theme }) => theme['gray-300']};

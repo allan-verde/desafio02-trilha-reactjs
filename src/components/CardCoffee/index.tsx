@@ -3,20 +3,34 @@ import { Button } from '../Button'
 import { InputNumber } from '../InputNumber'
 import { Buy, Container, Tag } from './styles'
 import { useTheme } from 'styled-components'
+import { useState } from 'react'
+import { ICoffeeList } from '../../utils/listCoffe'
+import { formateNumberToReal } from '../../utils/formateNumberToReal'
 
 interface CardCoffeeProps {
-  coffee: any
+  coffee: ICoffeeList
 }
 
 export function CardCoffee({ coffee }: CardCoffeeProps) {
+  const { description, image, name, price, tags } = coffee
   const theme = useTheme()
+
+  const [quantity, setQuantity] = useState(1)
+
+  function handleIncrement() {
+    setQuantity((state) => state + 1)
+  }
+
+  function handleDecrement() {
+    if (quantity > 1) setQuantity((state) => state - 1)
+  }
   
   return (
     <Container>
-      <img src={coffee.image} alt="" />
+      <img src={image} alt="" />
 
       <div className="tags">
-        {coffee.tags.map((tag: any) => (
+        {tags.map(tag => (
           <Tag key={tag}>
             <p>{tag}</p>
           </Tag>
@@ -24,14 +38,18 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
       </div>
 
       <div className="info">
-        <h3>{coffee.name}</h3>
-        <p>{coffee.description}</p>
+        <h3>{name}</h3>
+        <p>{description}</p>
       </div>
 
       <Buy>
-        <p>R${' '}<span>{(9.9).toFixed(2).split('.').join(',')}</span></p>
+        <p>R${' '}<span>{formateNumberToReal(price)}</span></p>
         <div className="actions">
-          <InputNumber onDecrement={() => null} onIncrement={() => null} value={1} />
+          <InputNumber
+            onDecrement={handleIncrement}
+            onIncrement={handleDecrement}
+            value={quantity}
+          />
           <Button variant="TERTIARY">
             <ShoppingCartSimple size={22} color={theme.white} weight="fill" />
           </Button>
