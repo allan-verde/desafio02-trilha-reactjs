@@ -85,7 +85,7 @@ export function Header() {
           )}
         </Location>
 
-        <Cart value={0} onClick={handleNavitationToCheckout} />
+        <Cart onClick={handleNavitationToCheckout} />
       </Actions>
     </Container>
   )
