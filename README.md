@@ -63,7 +63,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
 ### Resultado final
-https://github.com/allan-verde/desafio02-trilha-reactjs
+- [Vercel](https://desafio02-trilha-reactjs-olive.vercel.app/)
 
 
 ### Autor
