@@ -8,17 +8,19 @@ import { Input } from '../../components/Input'
 import { InputNumber } from '../../components/InputNumber'
 import { CartContext } from '../../contexts/cart'
 import { formateNumberToReal } from '../../utils/formateNumberToReal'
+import { useNavigate } from 'react-router-dom'
 
 export function Checkout() {
   const theme = useTheme()
-  const { cart, changeCartItem, removeCartItem } = useContext(CartContext)
+  const { cart, changeCartItem, removeCartItem, removeAllCartItems } = useContext(CartContext)
+  const navigate = useNavigate()
 
   const totalItens = cart.reduce((acc, { item, quantity }) => acc + item.price * quantity, 0)
   const delieveryPrice = 3.5
   const totalPrice = totalItens + delieveryPrice
 
   const [cep, setCep] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState<'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY'>('MONEY' as const)
+  const [paymentMethod, setPaymentMethod] = useState<'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY'>('MONEY')
   const [address, setAddress] = useState({
     street: '',
     number: '',
@@ -63,6 +65,24 @@ export function Checkout() {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  function handleConfirmOrder() {
+    if (cart.length === 0) return alert('Seu carrinho está vazio')
+
+    if (cep.length !== 9) return alert('Informe o CEP de entrega')
+    if (address.street === '') return alert('Informe o endereço de entrega')
+    if (address.number === '') return alert('Informe o número do endereço de entrega')
+    if (address.neighborhood === '') return alert('Informe o bairro do endereço de entrega')
+    if (address.city === '') return alert('Informe a cidade do endereço de entrega')
+    if (address.state === '') return alert('Informe o estado do endereço de entrega')
+
+    removeAllCartItems()
+
+    navigate('/success', { state: {
+      address,
+      paymentMethod
+    }})
   }
 
   useEffect(() => {
@@ -217,7 +237,10 @@ export function Checkout() {
               </div>
             </Prices>
 
-            <Button disabled={cart.length === 0} >Confirmar pedido</Button>
+            <Button
+              disabled={cart.length === 0}
+              onClick={handleConfirmOrder}
+            >Confirmar pedido</Button>
           </div>
         </Cart>
       </Content>

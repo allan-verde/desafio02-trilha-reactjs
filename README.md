@@ -1,31 +1,33 @@
-<!--
 <p align="center">
-  <img src="./src/assets/logo.png" alt="Daily Diet Logo">
+  <img src="./src/assets/logo.svg" alt="Daily Diet Logo">
 </p>
--->
 
 <h1 align="center">Coffee Delivery</h1>
 
 Bem-vindo ao projeto Coffee Delivery, feito com React! Este é um dos meus projetos nessa tecnologia e é uma aplicação simples para gerenciar um carrinho de compras de uma cafeteria fictícia, desenvolvida com uso de algumas bibliotecas adicionais de suporte, utilizando principalmente as funcionalidades nativas do React.
 
 <h4 align="center"> 
-	🚧  React  🚀 Em Andamento...  🚧
+	✅ React 🚀 Concluído ✅
 </h4>
 
 
 ### Features
 
-- [ ] Listagem de produtos (cafés) disponíveis para compra
-- [ ] Adicionar uma quantidade específicas de itens no carrinho
-- [ ] Aumentar ou remover a quantidade de itens no carrinho
-- [ ] Formulário para o usuário preencher o seu endereço
-- [ ] Exibir o total de itens no carrinho no Header
-- [ ] Exibir o valor total da soma de itens no carrinho multiplicados pelo valor
+- [x] Listagem de produtos (cafés) disponíveis para compra
+- [x] Adicionar uma quantidade específicas de itens no carrinho
+- [x] Aumentar ou remover a quantidade de itens no carrinho
+- [x] Formulário para o usuário preencher o seu endereço
+- [x] Exibir o total de itens no carrinho no Header
+- [x] Exibir o valor total da soma de itens no carrinho multiplicados pelo valor
 
-<!--
+
 ### Principais Ferramentas
 - [Styled-component](https://styled-components.com/)
--->
+- [React-router-dom](https://reactrouter.com/en/main)
+- [Phosphor-react](https://phosphoricons.com/)
+- [ViaCep-API](https://viacep.com.br/)
+- [Google-Maps](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
 
 ### Pré-requisitos
 
@@ -38,13 +40,13 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 ```bash
 # Clone este repositório
-$ git clone <https://github.com/allan-verde/desafio02-trilha-reactjs>
+$ git clone https://github.com/allan-verde/desafio02-trilha-reactjs.git
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd desafio02-trilha-reactjs
 
 # Instale as dependências
-$ npm install
+$ npm i
 
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
@@ -61,9 +63,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
 ### Resultado final
-<!--
 https://github.com/allan-verde/desafio02-trilha-reactjs
--->
 
 
 ### Autor

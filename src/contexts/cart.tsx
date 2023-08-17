@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { ICoffee, coffeeList } from '../utils/listCoffe'
 
 interface ICartItem {
@@ -10,12 +10,14 @@ interface CartContextType {
   cart: ICartItem[]
   changeCartItem(coffeeId: number, quantity: number): void
   removeCartItem(coffeeId: number): void
+  removeAllCartItems(): void
 }
 
 const initialState: CartContextType = {
   cart: [],
   changeCartItem: () => {},
-  removeCartItem: () => {}
+  removeCartItem: () => {},
+  removeAllCartItems: () => {}
 }
 
 export const CartContext = createContext<CartContextType>(initialState)
@@ -25,7 +27,15 @@ interface CartContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<ICartItem[]>([])
+  const [cart, setCart] = useState<ICartItem[]>(() => {
+    const cart = localStorage.getItem('@coffee-delivery:cart')
+
+    if (cart) {
+      return JSON.parse(cart)
+    }
+
+    return []
+  })
 
   function changeCartItem(coffeeId: number, quantity: number) {
     setCart((state) => {
@@ -68,12 +78,21 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     })
   }
 
+  function removeAllCartItems() {
+    setCart([])
+  }
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cart))
+  }, [cart])
+
   return (
     <CartContext.Provider
       value={{
         cart,
         changeCartItem,
-        removeCartItem
+        removeCartItem,
+        removeAllCartItems
       }}
     >
       {children}

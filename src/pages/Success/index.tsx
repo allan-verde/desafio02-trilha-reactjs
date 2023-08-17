@@ -1,12 +1,32 @@
+import { Key } from 'react'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
 import { Container } from './styles'
 
 import IllustrationImg from '../../assets/illustration.png'
+import { Path, useLocation } from 'react-router-dom'
+
+interface StateProps {
+  address: {
+    street: string
+    number: string
+    complement: string
+    neighborhood: string
+    city: string
+    state: string
+  }
+  paymentMethod: 'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY'
+}
+
+interface Location extends Path {
+  state: StateProps;
+  key: Key;
+}
 
 export function Success() {
   const theme = useTheme()
+  const { state: { address, paymentMethod } }: Location = useLocation()
 
   return (
     <Container>
@@ -23,17 +43,9 @@ export function Success() {
               </div>
               <div className="item">
                 <p>
-                  Entrega em
-                  {' '}
-                  <span>{'Rua João Daniel Martinelli'}</span>
-                  {', '}
-                  {'102'}
-                  {'\n'}
-                  {'Farrapos'}
-                  {' - '}
-                  {'Porto Alegre'}
-                  {', '}
-                  {'RS'}
+                  {'Entrega em '}<span>{address.street}</span>{`, ${address.number}`}
+                  <br />
+                  {`${address.neighborhood} - ${address.city}, ${address.state}`}
                 </p>
               </div>
             </div>
@@ -52,7 +64,11 @@ export function Success() {
               </div>
               <div className="item">
                 <p>Pagamento na entrega</p>
-                <span>{'Cartão de Crédito'}</span>
+                <span>
+                  {paymentMethod === 'CREDIT_CARD' && 'Cartão de crédito'}
+                  {paymentMethod === 'DEBIT_CARD' && 'Cartão de débito'}
+                  {paymentMethod === 'MONEY' && 'Dinheiro'}
+                </span>
               </div>
             </div>
           </div>
